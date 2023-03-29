@@ -1,10 +1,11 @@
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
-const { argv } = require("process");
+// const path = require("path");
+// const { argv } = require("process");
 
-const portIndex = argv.indexOf("--port");
-const port = portIndex !== -1 ? Number(argv[portIndex + 1]) : 3000;
+// const portIndex = argv.indexOf("--port");
+// const port = portIndex !== -1 ? Number(argv[portIndex + 1]) : 3000;
+const arg=require("minimist")(process.argv.slice(2))
 
 const server = http.createServer((req, res) => {
   const { method, url: reqUrl } = req;
@@ -53,7 +54,8 @@ const server = http.createServer((req, res) => {
     res.end("Page not found");
   }
 });
+server.listen(arg);
 
-server.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// server.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
 });

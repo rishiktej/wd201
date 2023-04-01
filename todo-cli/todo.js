@@ -62,11 +62,15 @@ const todoList = () => {
         // eslint-disable-next-line no-const-assign
         status = "[x]";
       }
-      const formattedDate = new Date(todoItem.dueDate).toLocaleDateString();
+      const date = new Date(todoItem.dueDate);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const formattedDate = `${year}-${month}-${day}`;
       if (todoItem.dueDate === today) {
-        displayableList += `${status} ${todoItem.title}\n`;
+        displayableList += `${i + 1}. ${status} ${todoItem.title}\n`;
       } else {
-        displayableList += ` ${status} ${
+        displayableList += `${i + 1}. ${status} ${
           todoItem.title
         } ${formattedDate}\n`;
       }

@@ -70,9 +70,7 @@ const todoList = () => {
       if (todoItem.dueDate === today) {
         displayableList += `${status} ${todoItem.title}\n`;
       } else {
-        displayableList += `${status} ${
-          todoItem.title
-        } ${formattedDate}\n`;
+        displayableList += `${status} ${todoItem.title} ${formattedDate}\n`;
       }
     }
     return displayableList;

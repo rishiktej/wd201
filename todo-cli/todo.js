@@ -64,9 +64,9 @@ const todoList = () => {
       }
       const formattedDate = new Date(todoItem.dueDate).toLocaleDateString();
       if (todoItem.dueDate === today) {
-        displayableList += `${i + 1}. ${status} ${todoItem.title}\n`;
+        displayableList += `${status} ${todoItem.title}\n`;
       } else {
-        displayableList += `${i + 1}. ${status} ${
+        displayableList += ` ${status} ${
           todoItem.title
         } ${formattedDate}\n`;
       }

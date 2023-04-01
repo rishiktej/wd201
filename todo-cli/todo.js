@@ -68,9 +68,9 @@ const todoList = () => {
       const day = String(date.getDate()).padStart(2, "0");
       const formattedDate = `${year}-${month}-${day}`;
       if (todoItem.dueDate === today) {
-        displayableList += `${i + 1}. ${status} ${todoItem.title}\n`;
+        displayableList += `${status} ${todoItem.title}\n`;
       } else {
-        displayableList += `${i + 1}. ${status} ${
+        displayableList += `${status} ${
           todoItem.title
         } ${formattedDate}\n`;
       }

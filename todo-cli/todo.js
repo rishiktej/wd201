@@ -68,9 +68,13 @@ const todoList = () => {
       const day = String(date.getDate()).padStart(2, "0");
       const formattedDate = `${year}-${month}-${day}`;
       if (todoItem.dueDate === today) {
-        displayableList += `${status} ${todoItem.title}\n`;
+        displayableList += status + " " + todoItem.title;
       } else {
-        displayableList += `${status} ${todoItem.title} ${formattedDate}\n`;
+        displayableList += status + " " + todoItem.title + " " + formattedDate;
+      }
+      if (i < list.length - 1) {
+        // Only add a newline if not the last item
+        displayableList += "\n";
       }
     }
     return displayableList;

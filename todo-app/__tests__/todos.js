@@ -83,7 +83,7 @@ describe("Todo Application", function () {
     const todoID = JSON.parse(createResponse.text).id;
 
     // Delete the todo
-    const deleteResponse = await agent.delete(`/todos/${todoID}`).send();
+    const deleteResponse = await agent.destroy(`/todos/${todoID}`).send();
 
     // Make sure the response has a 200 status code and a boolean value
     expect(deleteResponse.statusCode).toBe(200);
@@ -96,6 +96,6 @@ describe("Todo Application", function () {
     const getResponse = await agent.get(`/todos/${todoID}`).send();
 
     // Make sure we get a 404 Not Found error
-    expect(getResponse.statusCode).toBe(200);
+    expect(getResponse.statusCode).toBe(404);
   });
 });

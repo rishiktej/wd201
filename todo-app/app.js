@@ -3,10 +3,20 @@ const app = express();
 const { Todo } = require("./models");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
+const path = require("path");
 
-app.get("/", function (request, response) {
-  response.send("Hello World");
+app.set("view engine", "ejs");
+
+app.get("/", async (request, response, next) => {
+  const alltodos = await Todo.gettodo();
+  if (request.accepts("html")) {
+    response.render("index", { alltodos });
+  } else {
+    response.json({ alltodos });
+  }
 });
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/todos", async function (_request, response) {
   console.log("Processing list of all Todos ...");
@@ -62,16 +72,13 @@ app.delete("/todos/:id", async function (request, response) {
   // First, we have to query our database to delete a Todo by ID.
   // Then, we have to respond back with true/false based on whether the Todo was deleted or not.
   // response.send(true)
+
   try {
-    const Deletedtodo = await Todo.destroy({where{
-                                          id:request.params.id}
-                                           });
-//     if (Deletedtodo) {
-//       response.send(true);
-//     } else {
-//       response.send(false);
-//     }
-    response.send(Deletedtodo>0);
+    const Deletedtodo = await Todo.destroy({
+      where: { id: request.params.id },
+    });
+
+    response.send(Deletedtodo > 0);
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);

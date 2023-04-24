@@ -1,0 +1,28 @@
+<table style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr style="background-color:yellow;">
+            <th style="border: 1px solid black; padding: 8px;">ID</th>
+            <th style="border: 1px solid black; padding: 8px;">Todo-item</th>
+            <th style="border: 1px solid black; padding: 8px;">DueDate</th>
+            <th style="border: 1px solid black; padding: 8px;">completedstatus</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% alltodos.forEach(todo=> { %>
+            <tr>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <%= todo.id %>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <%= todo.title %>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <%=todo.dueDate%>
+                </td>
+                <td style="border: 1px solid black; padding: 8px;">
+                    <%= todo.completed%>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

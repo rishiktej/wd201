@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>;
+        <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+        <title>
+            My-to-Do-Application
+        </title>
+        <script src="https://cdn.tailwindcss.com/"></script>
+        <link href="/css/styles.css" rel="stylesheet">
+    </head>
+<body>
+    My-to-Do-Application
+    <table>
+        <% for(var i=0;i < alltodos.length;i++) {%>
+            <tr>
+                <td><%= alltodos[i].title %></td>
+            </tr>
+       <% } %>
+    </table>
+</body>
+</html>

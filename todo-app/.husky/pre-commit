@@ -1,2 +1,4 @@
-#!/bin/sh
-npm run lint
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd todo-app && npm test
+npx lint-staged

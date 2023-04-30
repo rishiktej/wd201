@@ -30,17 +30,17 @@
                <%- include('todos.ejs') %>
             <% const currentDate=new Date().toISOString().slice(0, 10); %>
             <% const overdueTodos=alltodos.filter(todo=> todo.dueDate < currentDate); %>
-            <h5>Overdue<span id="count-overdue" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
+           <h5 style="display: inline">Overdue </h5><span style="display:inline" id="count-overdue" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
                     <%= overdueTodos.length %>
-            </span></h5>
+            </span><br>
             <% const duetodayTodos=alltodos.filter(todo=> todo.dueDate === currentDate); %>
-                    <h5>Due Today<span id="count-due-today" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
+                    <h5 style="display: inline">Due Today </h5><span style="display: inline" id="count-due-today" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
                             <%= duetodayTodos.length %>
-                    </span></h5>
+                    </span><br>
             <% const duelaterTodos=alltodos.filter(todo=> todo.dueDate > currentDate); %>
-                    <h5>Due Later<span id="count-due-later" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
+                    <h5 style="display: inline">Due Later </h5><span style="display: inline" id="count-due-later" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
                             <%= duelaterTodos.length %>
-                    </span></h5>
+                    </span>
             </div>
         </div>
     </div>

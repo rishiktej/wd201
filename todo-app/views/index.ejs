@@ -30,17 +30,11 @@
                <%- include('todos.ejs') %>
             <% const currentDate=new Date().toISOString().slice(0, 10); %>
             <% const overdueTodos=alltodos.filter(todo=> todo.dueDate < currentDate); %>
-            <h5>Overdue <label id="count-overdue" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                    <%= overdueTodos.length %>
-                </label></h5>
+            <h5>Overdue</h5>
             <% const duetodayTodos=alltodos.filter(todo=> todo.dueDate === currentDate); %>
-                    <h5>Due Today <label id="count-due-today" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                            <%= duetodayTodos.length %>
-                        </label></h5>
+                    <h5>Due Today</h5>
             <% const duelaterTodos=alltodos.filter(todo=> todo.dueDate > currentDate); %>
-                    <h5>Due Later <label id="count-overdue" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                            <%= duelaterTodos.length %>
-                        </label></h5>
+                    <h5>Due Later</h5>
             </div>
         </div>
     </div>

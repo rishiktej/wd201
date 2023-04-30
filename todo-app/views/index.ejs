@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8"/>;
-        <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+        <meta name="viewport" content="width=divice-width,initial-scale=1.0"/>
         <title>
             My-to-Do-Application
         </title>
@@ -10,8 +10,27 @@
         <link href="/css/styles.css" rel="stylesheet">
     </head>
 <body>
-    <%- include('header.ejs') %>
-    <%- include('footer.ejs') %>
-    <%- include('todos.ejs') %>
+    <div class="grid grid-cols-6">
+        <div class="col-start-3 col-span-2">
+            <%- include('header.ejs') %>
+            <form>
+                <div class="flex gap-2 py-4">
+                    <div class="flex-auto">
+                        <input type="text"  placeholder="what's next?"  class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm"required />
+                    </div>
+                    <div class="flex-auto">
+                        <input type="date" class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm" />
+                    </div>
+                    <div class="flex-none">
+                        <button type="submit" class="bg-green-600 text-white py-1.5 px-5 rounded font-midium mr-2 mb-2">Add</button>
+                    </div>
+                </div>
+            </form>
+            <div>
+               <%- include('todos.ejs') %>
+            </div>
+        </div>
+    </div>
+   
 </body>
 </html>

@@ -1,0 +1,22 @@
+import pandas as pd
+
+# Creating a new data frame with the given data
+car_specs_df = pd.DataFrame({
+    'Company Name': ['Toyota', 'Honda', 'Hyundai', 'Maruti Suzuki', 'Kia', 'Tesla'],
+    'Model Name': ['Corolla', 'Civic', 'i20', 'Baleno', 'Seltos', 'Model S'],
+    'Fuel Type': ['Petrol', 'Gas', 'Petrol', 'Petrol', 'Diesel', 'EV'],
+    'Body Style': ['Sedan', 'Sedan', 'Hatchback', 'Hatchback', 'SUV', 'Sedan'],
+    'Car Length': ['4620mm', '4652mm', '3995mm', '3995mm', '4315mm', '4970mm']
+})
+
+# Creating a new Excel writer object
+writer = pd.ExcelWriter('car_specs.xlsx', engine='xlsxwriter')
+
+# Writing the data frame to the Excel file
+car_specs_df.to_excel(writer, index=False)
+
+# Saving the Excel file
+writer.save()
+
+# Displaying a message
+print("Data inserted into Excel file successfully.")

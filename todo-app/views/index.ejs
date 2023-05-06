@@ -1,25 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8"/>;
-        <meta name="viewport" content="width=divice-width,initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <meta name="csrf-token" content="<%= csrfToken %>" />
         <title>
             My-to-Do-Application
         </title>
         <script src="https://cdn.tailwindcss.com/"></script>
         <link href="/css/styles.css" rel="stylesheet">
+        <script>
+            var token =document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+            function updateTodo(id, status) {
+                    fetch(`/todos/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({  "_csrf": token, completed: status })
+                    })
+                        .then((res) => {
+                            if (res.ok) {
+                                // Reload the page to show the updated todo list
+                                window.location.reload();
+                            }
+                        })
+                        .catch((err) => {
+                            console.error(error);
+                        });
+                }
+
+
+              function deleteTodo(id) {
+                    fetch(` /todos/${id}`, {
+                        method: 'delete',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ "_csrf": token })
+                    })
+                        .then((res) => {
+                            if (res.ok) {
+                                window.location.reload();
+                            }
+                        })
+                        .catch((err) => console.error(error));
+                }
+        </script>
+
     </head>
 <body>
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
             <%- include('header.ejs') %>
-            <form>
+            <form action="/todos" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                 <div class="flex gap-2 py-4">
                     <div class="flex-auto">
-                        <input type="text"  placeholder="what's next?"  class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm"required />
+                        <input required type="text" name="title" placeholder="what's next?"  class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm"required />
                     </div>
                     <div class="flex-auto">
-                        <input type="date" class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm" />
+                        <input required type="date" name="dueDate" class="border border-grey-300 rounded text-grey-900 w-full p-2 text-sm" />
                     </div>
                     <div class="flex-none">
                         <button type="submit" class="bg-green-600 text-white py-1.5 px-5 rounded font-midium mr-2 mb-2">Add</button>
@@ -27,20 +70,10 @@
                 </div>
             </form>
             <div>
-               <%- include('todos.ejs') %>
-            <% const currentDate=new Date().toISOString().slice(0, 10); %>
-            <% const overdueTodos=alltodos.filter(todo=> todo.dueDate < currentDate); %>
-           <h5 style="display: inline">Overdue </h5><span style="display:inline" id="count-overdue" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                    <%= overdueTodos.length %>
-            </span><br>
-            <% const duetodayTodos=alltodos.filter(todo=> todo.dueDate === currentDate); %>
-                    <h5 style="display: inline">Due Today </h5><span style="display: inline" id="count-due-today" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                            <%= duetodayTodos.length %>
-                    </span><br>
-            <% const duelaterTodos=alltodos.filter(todo=> todo.dueDate > currentDate); %>
-                    <h5 style="display: inline">Due Later </h5><span style="display: inline" id="count-due-later" class="w-4 h-4 p-2 text-blue-600 bg-grey-100 rounded border">
-                            <%= duelaterTodos.length %>
-                    </span>
+            <%- include('todos.ejs', {title:"Overdue" ,data:Overdue}) %>
+            <%- include('todos.ejs', {title:"Due Today" ,data:dueToday}) %>
+            <%- include('todos.ejs', {title:"Due Later" ,data:dueLater}) %>
+            <%- include('todos.ejs', {title:"Completed Items" ,data:completed}) %>
             </div>
         </div>
     </div>

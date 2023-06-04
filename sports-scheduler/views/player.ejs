@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body class="bg-gray-100">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl text-center font-bold mb-8">Welcome</h1>
+        <div class="flex justify-end items-center">
+            <a href="/signout" class="text-blue-500 hover:underline">
+                <svg class="h-5 w-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+                Sign Out
+            </a>
+        </div>
+
+        <% if (allsports.length> 0) { %>
+            <h2 class="text-2xl text-red-900 mb-4">List of Sports:</h2>
+            <ul class="list-disc pl-8">
+                <% let displayedSports=[]; %>
+                    <% allsports.forEach(function(sport) { %>
+                        <% if (!displayedSports.includes(sport.sport_name)) { %>
+                            <li class="mb-2"><a href="/sessions?sport=<%= sport.sport_name %>"
+                                    class="text-blue-500 hover:underline">
+                                    <%= sport.sport_name %>
+                                </a></li>
+                            <% displayedSports.push(sport.sport_name); %>
+                                <% } %>
+                                    <% }); %>
+            </ul>
+            <% } else { %>
+                <p class="text-gray-500 text-center mt-8">No sports available.</p>
+                <% } %>
+    </div>
+</body>
+
+</html>
